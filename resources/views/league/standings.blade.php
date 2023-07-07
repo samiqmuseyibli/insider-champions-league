@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h5 class="mt-5 d-flex justify-content-center">Match Results</h5>
+                    <h5 class="mt-5 d-flex justify-content-center">{{ $league->name }} - Match Results</h5>
                     <table class="table table-hover">
                         <thead class="">
                         <tr>

@@ -62,7 +62,7 @@ class FixtureController extends Controller
             ->first();
 
         if ($league == null) {
-            return redirect()->route('new');
+            return redirect()->route('app');
         }
 
         $fixtures = Fixture::with(['homeTeam', 'awayTeam'])
@@ -75,6 +75,7 @@ class FixtureController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return bool|RedirectResponse
      */
     public function play(Request $request): bool|RedirectResponse
@@ -82,17 +83,18 @@ class FixtureController extends Controller
         $league = League::with('teams')->latest()->first();
 
         if ($league == null) {
-            return false;
+            return redirect()->route('app');
         }
 
         $week = $request->week;
         if ($week === "all") {
             $this->playAllFixtures($league);
         } else {
+            $week = intval($week);
+
             $this->playNextWeekFixtures($league, ++$week);
         }
-
-        $this->teamService->updateTeamStatistics($league);
+//        $this->teamService->updateTeamStatistics($league);
 
         return redirect()->route('fixtures', ['week' => $week ?? '']);
     }
