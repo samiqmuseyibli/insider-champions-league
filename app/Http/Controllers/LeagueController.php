@@ -8,6 +8,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class LeagueController extends Controller
 {
@@ -37,7 +39,7 @@ class LeagueController extends Controller
     {
         $league = $this->leagueService->createLeague('England Premier League');
 
-        return response()->json(['league' => $league, 'success' => true], 200);
+        return response()->json(['league' => $league, 'success' => true], ResponseAlias::HTTP_CREATED);
     }
 
 
