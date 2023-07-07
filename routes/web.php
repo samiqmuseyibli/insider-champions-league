@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\LeagueController::class, 'index'])->name('app');
+Route::post('/league', [\App\Http\Controllers\LeagueController::class, 'store'])->name('league');
+Route::get('/fixtures', [\App\Http\Controllers\FixtureController::class, 'fixtures'])->name('fixtures');
+Route::put('/fixtures', [\App\Http\Controllers\FixtureController::class, 'changeFixture']);
+Route::get('/fixtures/play', [\App\Http\Controllers\FixtureController::class, 'play'])->name('fixtures.play');
